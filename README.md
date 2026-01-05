@@ -1,2 +1,2 @@
 # worst_idea_ever-serverless
-Lots of worst ideas from a loser level designer :(
+Lots of worst ideas ever, from a loser level designer :(
