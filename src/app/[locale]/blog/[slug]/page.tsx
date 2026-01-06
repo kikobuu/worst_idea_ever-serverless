@@ -6,6 +6,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark.css"; 
 import { Separator } from "@/components/ui/separator";
+import Mermaid from "@/components/Mermaid";
 
 export default async function BlogPost({
   params
@@ -51,6 +52,16 @@ export default async function BlogPost({
                 <ReactMarkdown 
                     remarkPlugins={[remarkGfm]} 
                     rehypePlugins={[rehypeHighlight, rehypeSlug]}
+                    components={{
+                        code(props) {
+                            const {children, className, node, ...rest} = props
+                            const match = /language-(\w+)/.exec(className || '')
+                            if (match && match[1] === 'mermaid') {
+                                return <Mermaid chart={String(children).replace(/\n$/, '')} />
+                            }
+                            return <code {...props} className={className}>{children}</code>
+                        }
+                    }}
                 >
                     {post.content}
                 </ReactMarkdown>

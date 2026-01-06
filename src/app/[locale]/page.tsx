@@ -17,12 +17,12 @@ export default function Home() {
     <div className="container mx-auto py-4 px-4 md:py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[calc(100vh-12rem)] h-auto">
         {/* Left Sidebar Navigation Cards */}
-        <div className="lg:col-span-4 flex flex-col gap-6 h-full min-h-[500px] lg:min-h-0">
+        <div className="lg:col-span-4 flex flex-col gap-6 h-[calc(50vh-6rem)] min-h-[500px] lg:min-h-0">
           <Link href="/projects" className="block flex-1">
             <Card className="h-full hover:bg-muted/50 transition-colors relative overflow-hidden group border-2">
-              <CardContent className="h-full flex flex-col p-6 z-10 relative">
-                <Box className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-4 left-4" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-4 right-4">
+              <CardContent className="h-full flex flex-col p-6 z-5 relative">
+                <Box className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-1 left-1" />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-2 right-2">
                   {t('projectsTitle')}
                 </h2>
               </CardContent>
@@ -33,9 +33,9 @@ export default function Home() {
 
           <Link href="/blog" className="block flex-1">
             <Card className="h-full hover:bg-muted/50 transition-colors relative overflow-hidden group border-2">
-              <CardContent className="h-full flex flex-col p-6 z-10 relative">
-                <Monitor className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-4 left-4" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-4 right-4">
+              <CardContent className="h-full flex flex-col p-6 z-5 relative">
+                <Monitor className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-1 left-1" />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-2 right-2">
                   {t('blogsTitle')}
                 </h2>
               </CardContent>
@@ -44,9 +44,9 @@ export default function Home() {
 
           <Link href="/about" className="block flex-1">
             <Card className="h-full hover:bg-muted/50 transition-colors relative overflow-hidden group border-2">
-              <CardContent className="h-full flex flex-col p-6 z-10 relative">
-                <Info className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-4 left-4" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-4 right-4">
+              <CardContent className="h-full flex flex-col p-6 z-5 relative">
+                <Info className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-1 left-1" />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-2 right-2">
                   {t('aboutTitle')}
                 </h2>
               </CardContent>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Noto_Serif } from "next/font/google";
+import { JetBrains_Mono, Noto_Serif_SC, Noto_Serif_KR, Noto_Serif_JP } from "next/font/google";
 import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,13 +14,26 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
-const notoSerif = Noto_Serif({
+const notoSerifSC = Noto_Serif_SC({
   subsets: ["latin"],
-  variable: "--font-noto-serif",
+  weight: ["200", "300", "400", "500", "600", "700", "900"],
+  variable: "--font-noto-serif-sc",
+});
+
+const notoSerifKR = Noto_Serif_KR({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "900"],
+  variable: "--font-noto-serif-kr",
+});
+
+const notoSerifJP = Noto_Serif_JP({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "900"],
+  variable: "--font-noto-serif-jp",
 });
 
 export const metadata: Metadata = {
-  title: "Wstidever Blog",
+  title: "Wrost Ideas Ever",
   description: "Personal portfolio and blog for Level Design",
 };
 
@@ -42,7 +55,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${jetbrainsMono.variable} ${notoSerif.variable} font-mono antialiased flex flex-col min-h-screen`}
+        className={`${jetbrainsMono.variable} ${notoSerifSC.variable} ${notoSerifKR.variable} ${notoSerifJP.variable} font-mono antialiased flex flex-col min-h-screen`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

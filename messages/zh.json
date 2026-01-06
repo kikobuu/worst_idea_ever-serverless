@@ -4,11 +4,11 @@
     "blogs": "博客",
     "about": "关于",
     "searchPlaceholder": "搜索文档",
-    "contact": "联系我"
+    "contact": "联系方式"
   },
   "Home": {
     "projectsTitle": "关卡设计项目",
     "blogsTitle": "个人博客",
-    "aboutTitle": "关于我"
+    "aboutTitle": "关于"
   }
 }
