@@ -1,13 +1,15 @@
 "use client"
 
+import { useState } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
-import { Search, Globe, Sun, Moon, Mail, Menu } from "lucide-react";
+import { Search, Globe, Sun, Moon, Mail, Menu, Box, Monitor, Info, Home } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTranslations, useLocale } from "next-intl";
+import { Card } from "@/components/ui/card";
 
 const Navbar = () => {
   const { setTheme, theme } = useTheme();
@@ -15,10 +17,21 @@ const Navbar = () => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   const toggleLanguage = () => {
     const nextLocale = locale === 'en' ? 'zh' : 'en';
     router.replace(pathname, {locale: nextLocale});
+    setOpen(false);
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+    setOpen(false);
+  };
+
+  const handleLinkClick = () => {
+    setOpen(false);
   };
 
   return (
@@ -27,39 +40,78 @@ const Navbar = () => {
         
         {/* Mobile Menu (Left) */}
         <div className="md:hidden mr-2">
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
-              <div className="flex flex-col gap-4 mt-8">
-                <Link href="/" className="font-bold text-lg mb-4">
-                  Worst Idea Ever
-                </Link>
-                <nav className="flex flex-col gap-4">
-                  <Link
-                    href="/projects"
-                    className="text-foreground/60 hover:text-foreground transition-colors"
-                  >
-                    {t('projects')}
+            <SheetContent side="left" className="w-[300px] sm:w-[400px]" hideClose>
+              <nav className="flex flex-col gap-3 mt-6 px-1">
+                <div className="grid gap-2">
+                  <Link href="/" onClick={handleLinkClick}>
+                    <Card className="flex items-center gap-3 p-4 transition-colors cursor-pointer border-2 bg-primary text-primary-foreground hover:bg-primary/90">
+                      <Home className="h-5 w-5 text-primary-foreground" />
+                      <span className="font-medium">{t('home')}</span>
+                    </Card>
                   </Link>
-                  <Link
-                    href="/blog"
-                    className="text-foreground/60 hover:text-foreground transition-colors"
-                  >
-                    {t('blogs')}
+                  
+                  <Link href="/projects" onClick={handleLinkClick}>
+                    <Card className="flex items-center gap-3 p-4 hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer border-2 bg-card hover:bg-accent">
+                      <Box className="h-5 w-5 text-primary" />
+                      <span className="font-medium">{t('projects')}</span>
+                    </Card>
                   </Link>
-                  <Link
-                    href="/about"
-                    className="text-foreground/60 hover:text-foreground transition-colors"
-                  >
-                    {t('about')}
+                  
+                  <Link href="/blog" onClick={handleLinkClick}>
+                    <Card className="flex items-center gap-3 p-4 hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer border-2 bg-card hover:bg-accent">
+                      <Monitor className="h-5 w-5 text-primary" />
+                      <span className="font-medium">{t('blogs')}</span>
+                    </Card>
                   </Link>
-                </nav>
-              </div>
+                  
+                  <Link href="/about" onClick={handleLinkClick}>
+                    <Card className="flex items-center gap-3 p-4 hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer border-2 bg-card hover:bg-accent">
+                      <Info className="h-5 w-5 text-primary" />
+                      <span className="font-medium">{t('about')}</span>
+                    </Card>
+                  </Link>
+                </div>
+
+                <Separator className="my-2" />
+                
+                <div className="flex flex-col gap-2">
+                  <div className="text-sm text-muted-foreground px-2">
+                    {t('settings')}
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Card 
+                      className="flex items-center justify-center gap-2 p-3 cursor-pointer hover:bg-accent transition-colors border-2 bg-card"
+                      onClick={toggleLanguage}
+                    >
+                      <Globe className="h-4 w-4" />
+                      <span className="text-sm font-medium">{locale === 'en' ? '中文' : 'English'}</span>
+                    </Card>
+                    <Card 
+                      className="flex items-center justify-center gap-2 p-3 cursor-pointer hover:bg-accent transition-colors border-2 bg-card"
+                      onClick={toggleTheme}
+                    >
+                      {theme === "dark" ? (
+                        <>
+                          <Sun className="h-4 w-4" />
+                          <span className="text-sm font-medium">Light</span>
+                        </>
+                      ) : (
+                        <>
+                          <Moon className="h-4 w-4" />
+                          <span className="text-sm font-medium">Dark</span>
+                        </>
+                      )}
+                    </Card>
+                  </div>
+                </div>
+              </nav>
             </SheetContent>
           </Sheet>
         </div>

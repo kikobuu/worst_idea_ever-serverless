@@ -4,7 +4,9 @@
     "blogs": "博客",
     "about": "关于",
     "searchPlaceholder": "搜索文档",
-    "contact": "联系方式"
+    "contact": "联系方式",
+    "home": "首页",
+    "settings": "设置"
   },
   "Home": {
     "projectsTitle": "关卡设计项目",

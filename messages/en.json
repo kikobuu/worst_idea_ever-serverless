@@ -4,7 +4,9 @@
     "blogs": "Blogs",
     "about": "About",
     "searchPlaceholder": "Search documentation",
-    "contact": "Contact me"
+    "contact": "Contact me",
+    "home": "Home",
+    "settings": "Settings"
   },
   "Home": {
     "projectsTitle": "Level Designs Projects",
