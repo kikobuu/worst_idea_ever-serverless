@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { Box, Monitor, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,6 +11,8 @@ import {
 } from "@/components/ui/carousel";
 
 export default function Home() {
+  const t = useTranslations('Home');
+
   return (
     <div className="container mx-auto py-4 px-4 md:py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[calc(100vh-12rem)] h-auto">
@@ -18,9 +21,9 @@ export default function Home() {
           <Link href="/projects" className="block flex-1">
             <Card className="h-full hover:bg-muted/50 transition-colors relative overflow-hidden group border-2">
               <CardContent className="h-full flex flex-col p-6 z-10 relative">
-                <Box className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-1 left-4" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-1 right-4">
-                  Level Designs Projects
+                <Box className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-4 left-4" />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-4 right-4">
+                  {t('projectsTitle')}
                 </h2>
               </CardContent>
               {/* Decorative background element if needed */}
@@ -31,9 +34,9 @@ export default function Home() {
           <Link href="/blog" className="block flex-1">
             <Card className="h-full hover:bg-muted/50 transition-colors relative overflow-hidden group border-2">
               <CardContent className="h-full flex flex-col p-6 z-10 relative">
-                <Monitor className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-1 left-4" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-1 right-4">
-                  Personal Blogs
+                <Monitor className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-4 left-4" />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-4 right-4">
+                  {t('blogsTitle')}
                 </h2>
               </CardContent>
             </Card>
@@ -42,9 +45,9 @@ export default function Home() {
           <Link href="/about" className="block flex-1">
             <Card className="h-full hover:bg-muted/50 transition-colors relative overflow-hidden group border-2">
               <CardContent className="h-full flex flex-col p-6 z-10 relative">
-                <Info className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-1 left-4" />
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-1 right-4">
-                  About Me
+                <Info className="h-16 w-16 mb-4 text-slate-900 dark:text-slate-100 absolute top-4 left-4" />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 absolute bottom-4 right-4">
+                  {t('aboutTitle')}
                 </h2>
               </CardContent>
             </Card>

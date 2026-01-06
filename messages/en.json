@@ -1,0 +1,14 @@
+{
+  "Navbar": {
+    "projects": "LD Projects",
+    "blogs": "Blogs",
+    "about": "About",
+    "searchPlaceholder": "Search documentation",
+    "contact": "Contact me"
+  },
+  "Home": {
+    "projectsTitle": "Level Designs Projects",
+    "blogsTitle": "Personal Blogs",
+    "aboutTitle": "About Me"
+  }
+}
