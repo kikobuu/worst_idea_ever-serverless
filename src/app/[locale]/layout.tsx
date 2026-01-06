@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Noto_Serif } from "next/font/google";
 import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,6 +12,11 @@ import { routing } from "@/i18n/routing";
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
+});
+
+const notoSerif = Noto_Serif({
+  subsets: ["latin"],
+  variable: "--font-noto-serif",
 });
 
 export const metadata: Metadata = {
@@ -37,7 +42,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${jetbrainsMono.variable} font-mono antialiased flex flex-col min-h-screen`}
+        className={`${jetbrainsMono.variable} ${notoSerif.variable} font-mono antialiased flex flex-col min-h-screen`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

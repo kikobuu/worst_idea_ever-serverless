@@ -1,36 +1,60 @@
-export default function Blog() {
-  const posts = [
-    {
-      id: 1,
-      title: "Thoughts on Pacing in FPS Levels",
-      date: "2023-10-01",
-      excerpt: "Analyzing how enemy placement affects player flow and tension.",
-    },
-    {
-      id: 2,
-      title: "Learning Unreal Engine 5: First Impressions",
-      date: "2023-11-15",
-      excerpt: "My journey transitioning from Unity to Unreal Engine 5 for level design.",
-    },
-    // Add more placeholder posts
-  ];
+import { Link } from "@/i18n/routing";
+import { getAllPosts } from "@/lib/blog";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { CalendarIcon, TagIcon } from "lucide-react";
+
+export default async function Blog({
+  params
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params;
+  const posts = getAllPosts(locale);
 
   return (
-    <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Blog</h1>
-      <div className="space-y-8">
-        {posts.map((post) => (
-          <div key={post.id} className="border-b border-gray-200 dark:border-gray-700 pb-8 last:border-b-0">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">{post.date}</p>
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
-              <a href="#" className="hover:underline">{post.title}</a>
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">{post.excerpt}</p>
-            <a href="#" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 font-medium">
-              Read more &rarr;
-            </a>
-          </div>
-        ))}
+    <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <h1 className="text-3xl font-bold mb-8">Blogs</h1>
+      <div className="grid gap-6">
+        {posts.length === 0 ? (
+          <p className="text-muted-foreground">No posts found.</p>
+        ) : (
+          posts.map((post) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
+              <Card className="hover:bg-muted/50 transition-colors border-2">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center text-sm text-muted-foreground">
+                        <CalendarIcon className="mr-1 h-3 w-3" />
+                        {post.date}
+                    </div>
+                    {post.tags && post.tags.length > 0 && (
+                        <div className="flex items-center gap-2">
+                            {post.tags.map(tag => (
+                                <span key={tag} className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-500/10">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                  </div>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                    {post.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base line-clamp-2">
+                    {post.description}
+                  </CardDescription>
+                </CardContent>
+                <CardFooter>
+                  <span className="text-primary text-sm font-medium group-hover:underline">
+                    Read more &rarr;
+                  </span>
+                </CardFooter>
+              </Card>
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

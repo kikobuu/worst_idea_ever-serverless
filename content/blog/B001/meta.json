@@ -1,0 +1,13 @@
+{
+  "title": {
+    "en": "My First Blog Post",
+    "zh": "我的第一篇博客"
+  },
+  "description": {
+    "en": "This is a preview of my first blog post.",
+    "zh": "这是我的第一篇博客预览。"
+  },
+  "date": "2024-01-06",
+  "tags": ["General", "Introduction"],
+  "coverImage": "/images/b001.jpg"
+}
