@@ -7,6 +7,7 @@ import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark.css"; 
 import { Separator } from "@/components/ui/separator";
 import Mermaid from "@/components/Mermaid";
+import { isValidElement } from "react";
 
 export default async function BlogPost({
   params
@@ -53,6 +54,13 @@ export default async function BlogPost({
                     remarkPlugins={[remarkGfm]} 
                     rehypePlugins={[rehypeHighlight, rehypeSlug]}
                     components={{
+                        pre: ({ children, ...props }) => {
+                            if (isValidElement(children) && 
+                                (children.props as any).className?.includes('language-mermaid')) {
+                                return <>{children}</>;
+                            }
+                            return <pre {...props}>{children}</pre>;
+                        },
                         code(props) {
                             const {children, className, node, ...rest} = props
                             const match = /language-(\w+)/.exec(className || '')
