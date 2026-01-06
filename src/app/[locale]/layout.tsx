@@ -9,6 +9,7 @@ import {getMessages} from 'next-intl/server';
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Script from "next/script";
+import PageTransition from "@/components/PageTransition";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -76,7 +77,9 @@ export default async function RootLayout({
           >
             <Navbar />
             <main className="flex-grow">
-              {children}
+              <PageTransition>
+                {children}
+              </PageTransition>
             </main>
             <Footer />
           </ThemeProvider>

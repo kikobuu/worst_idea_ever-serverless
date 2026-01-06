@@ -1,3 +1,5 @@
+"use client"
+
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { Box, Monitor, Info } from "lucide-react";
@@ -9,9 +11,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const t = useTranslations('Home');
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div className="container mx-auto py-4 px-4 md:py-8">
@@ -19,7 +28,15 @@ export default function Home() {
         {/* Left Sidebar Navigation Cards */}
         <div className="lg:col-span-3 flex flex-col gap-4 h-auto min-h-[400px]">
           <Link href="/projects" className="block flex-1">
-            <Card className="h-full transition-colors relative overflow-hidden group border-2 bg-primary text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80 border-primary">
+            <Card 
+              className={cn(
+                "h-full transition-colors relative overflow-hidden group border-2 bg-primary text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80 border-primary",
+                isMounted 
+                  ? "animate-fadeInUp duration-500 ease-out" 
+                  : "opacity-0 translate-y-10"
+              )}
+              style={{ transitionDelay: '100ms' }}
+            >
               <CardContent className="h-full flex flex-row justify-between items-center p-6 z-5 relative">
                 <Box className="h-12 w-12 md:h-16 md:w-16 text-primary-foreground" />
                 <h2 className="text-xl md:text-2xl font-bold text-primary-foreground text-right">
@@ -31,7 +48,15 @@ export default function Home() {
           </Link>
 
           <Link href="/blog" className="block flex-1">
-            <Card className="h-full transition-colors relative overflow-hidden group border-2 bg-primary text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80 border-primary">
+            <Card 
+              className={cn(
+                "h-full transition-colors relative overflow-hidden group border-2 bg-primary text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80 border-primary",
+                isMounted 
+                  ? "animate-fadeInUp duration-500 ease-out" 
+                  : "opacity-0 translate-y-10"
+              )}
+              style={{ transitionDelay: '200ms' }}
+            >
               <CardContent className="h-full flex flex-row justify-between items-center p-6 z-5 relative">
                 <Monitor className="h-12 w-12 md:h-16 md:w-16 text-primary-foreground" />
                 <h2 className="text-xl md:text-2xl font-bold text-primary-foreground text-right">
@@ -42,7 +67,15 @@ export default function Home() {
           </Link>
 
           <Link href="/about" className="block flex-1">
-            <Card className="h-full transition-colors relative overflow-hidden group border-2 bg-primary text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80 border-primary">
+            <Card 
+              className={cn(
+                "h-full transition-colors relative overflow-hidden group border-2 bg-primary text-primary-foreground hover:bg-primary/90 dark:hover:bg-primary/80 border-primary",
+                isMounted 
+                  ? "animate-fadeInUp duration-500 ease-out" 
+                  : "opacity-0 translate-y-10"
+              )}
+              style={{ transitionDelay: '300ms' }}
+            >
               <CardContent className="h-full flex flex-row justify-between items-center p-6 z-5 relative">
                 <Info className="h-12 w-12 md:h-16 md:w-16 text-primary-foreground" />
                 <h2 className="text-xl md:text-2xl font-bold text-primary-foreground text-right">
@@ -54,7 +87,15 @@ export default function Home() {
         </div>
 
         {/* Right Content Slider */}
-        <div className="lg:col-span-9 h-64 lg:h-[600px]">
+        <div 
+          className={cn(
+            "lg:col-span-9 h-64 lg:h-[600px]",
+            isMounted 
+              ? "animate-fadeInLeft duration-500 ease-out" 
+              : "opacity-0 translate-x-10"
+          )}
+          style={{ transitionDelay: '200ms' }}
+        >
           <Card className="h-full border-2 bg-card flex items-center justify-center relative overflow-hidden">
              <Carousel className="w-full h-full">
               <CarouselContent className="h-full ml-0">
