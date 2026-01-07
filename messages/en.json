@@ -12,5 +12,17 @@
     "projectsTitle": "Level Designs Projects",
     "blogsTitle": "Personal Blogs",
     "aboutTitle": "About Me"
+  },
+  "Footer": {
+    "copyright": "All rights reserved.",
+    "copyrightPrefix": "©",
+    "copyrightName": "Yasushi Katsuyoshi",
+    "contentLicenseTitle": "Content License",
+    "contentLicenseText": "Unless otherwise noted, original content on this blog is licensed under",
+    "contentLicenseLinkText": "CC BY-NC-SA 4.0",
+    "contentLicenseTextEnd": "protocol.",
+    "contentLicenseReprint": "Reprints must attribute the source and retain original author attribution.",
+    "githubLabel": "View on GitHub",
+    "siteLicense": "Website source code is open source under GPL v3"
   }
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
+import Image from "next/image";
 import { Search, Globe, Sun, Moon, Mail, Menu, Box, Monitor, Info, Home } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -134,9 +135,14 @@ const Navbar = () => {
         {/* Logo Section */}
         <div className="flex items-center gap-2 mr-4">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center border-2 border-slate-800">
-               {/* Placeholder for the XX face logo */}
-               <span className="text-slate-800 font-bold text-xs">XX</span>
+            <div className="h-10 w-10 rounded-full overflow-hidden flex items-center justify-center border-2 border-slate-800">
+              <Image
+                src="/images/mrvn_icon_6feetsunder.png"
+                alt="MRVN Logo"
+                width={40}
+                height={40}
+                className="object-cover"
+              />
             </div>
           </Link>
         </div>

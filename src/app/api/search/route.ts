@@ -3,19 +3,25 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get("q")?.toLowerCase() || "";
+  const query = searchParams.get("q") || "";
+  const locale = searchParams.get("locale") || "en";
 
   if (!query.trim()) {
     return NextResponse.json([]);
   }
 
-  const posts = getAllPosts("en");
-  
+  const posts = getAllPosts(locale);
+  const queryLower = query.toLowerCase();
+
   const filteredPosts = posts.filter(post => {
+    const title = post.title?.toLowerCase() || "";
+    const description = post.description?.toLowerCase() || "";
+    const tagsLower = (post.tags || []).map(tag => tag.toLowerCase());
+
     return (
-      post.title.toLowerCase().includes(query) ||
-      post.description.toLowerCase().includes(query) ||
-      (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)))
+      title.includes(queryLower) ||
+      description.includes(queryLower) ||
+      tagsLower.some(tag => tag.includes(queryLower))
     );
   });
 

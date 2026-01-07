@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "@/i18n/routing"
+import { useLocale } from "next-intl"
 import {
   CommandDialog,
   CommandEmpty,
@@ -29,6 +30,7 @@ interface SearchCommandProps {
 
 export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   const router = useRouter()
+  const locale = useLocale()
   const [inputValue, setInputValue] = React.useState("")
   const [isLoading, setIsLoading] = React.useState(false)
   const [searchResults, setSearchResults] = React.useState<BlogPost[]>([])
@@ -57,7 +59,7 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
 
       setIsLoading(true)
       try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(inputValue)}`)
+        const response = await fetch(`/api/search?q=${encodeURIComponent(inputValue)}&locale=${locale}`)
         if (response.ok) {
           const posts = await response.json()
           setSearchResults(posts)
@@ -77,7 +79,7 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
 
     const debounceTimer = setTimeout(searchPosts, 300)
     return () => clearTimeout(debounceTimer)
-  }, [inputValue])
+  }, [inputValue, locale])
 
   React.useEffect(() => {
     if (shouldRefresh && searchResults.length > 0) {
@@ -112,7 +114,7 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   return (
     <CommandDialog open={internalOpen} onOpenChange={handleInternalOpenChange}>
       <CommandInput
-        placeholder="搜索博客文章..."
+        placeholder={locale === "zh" ? "搜索博客文章..." : "Search blog posts..."}
         value={inputValue}
         onValueChange={setInputValue}
       />
@@ -120,11 +122,13 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
         {isLoading ? (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="h-4 w-4 animate-spin mr-2" />
-            <span className="text-sm text-muted-foreground">搜索中...</span>
+            <span className="text-sm text-muted-foreground">
+              {locale === "zh" ? "搜索中..." : "Searching..."}
+            </span>
           </div>
         ) : searchResults.length > 0 ? (
           <>
-            <CommandGroup heading="博客文章">
+            <CommandGroup heading={locale === "zh" ? "博客文章" : "Blog Posts"}>
               {searchResults.map((post) => (
                 <CommandItem
                   key={post.slug}
@@ -142,28 +146,32 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
               ))}
             </CommandGroup>
             <CommandSeparator />
-            <CommandGroup heading="提示">
+            <CommandGroup heading={locale === "zh" ? "提示" : "Tips"}>
               <CommandItem disabled className="p-2">
                 <kbd className="inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                   ↵ 
                 </kbd>
-                <span className="ml-2 text-xs text-muted-foreground">选择</span>
+                <span className="ml-2 text-xs text-muted-foreground">
+                  {locale === "zh" ? "选择" : "Select"}
+                </span>
               </CommandItem>
               <CommandItem disabled className="p-2">
                 <kbd className="inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                   esc
                 </kbd>
-                <span className="ml-2 text-xs text-muted-foreground">关闭</span>
+                <span className="ml-2 text-xs text-muted-foreground">
+                  {locale === "zh" ? "关闭" : "Close"}
+                </span>
               </CommandItem>
             </CommandGroup>
           </>
         ) : inputValue.trim().length > 0 ? (
           <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
-            未找到相关结果
+            {locale === "zh" ? "未找到相关结果" : "No results found"}
           </CommandEmpty>
         ) : (
           <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
-            输入关键词搜索博客文章
+            {locale === "zh" ? "输入关键词搜索博客文章" : "Type to search blog posts"}
           </CommandEmpty>
         )}
       </CommandList>

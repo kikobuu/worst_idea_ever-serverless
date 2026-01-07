@@ -12,5 +12,17 @@
     "projectsTitle": "关卡设计项目",
     "blogsTitle": "个人博客",
     "aboutTitle": "关于"
+  },
+  "Footer": {
+    "copyright": "版权所有。",
+    "copyrightPrefix": "©",
+    "copyrightName": "Yasushi Katsuyoshi",
+    "contentLicenseTitle": "博客内容版权声明",
+    "contentLicenseText": "除非另有说明，本博客原创内容采用",
+    "contentLicenseLinkText": "CC BY-NC-SA 4.0",
+    "contentLicenseTextEnd": "协议进行授权。",
+    "contentLicenseReprint": "转载时请注明出处并保留原作者署名。",
+    "githubLabel": "在 GitHub 上查看",
+    "siteLicense": "网站源码采用 GPL v3 协议开源"
   }
 }
