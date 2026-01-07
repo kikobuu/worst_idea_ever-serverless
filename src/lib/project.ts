@@ -28,6 +28,7 @@ export type Project = {
   allowDownloadDemo: boolean;
   allowRequestProject: boolean;
   previewImage?: string;
+  content?: string;
 };
 
 export function getProjectSlugs() {
@@ -50,6 +51,12 @@ export function getProjectBySlug(slug: string, locale: string = 'en'): Project |
 
   try {
     const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8')) as ProjectMeta;
+    const contentPath = path.join(directory, `${locale}.md`);
+    let content = '';
+
+    if (fs.existsSync(contentPath)) {
+      content = fs.readFileSync(contentPath, 'utf8');
+    }
 
     return {
       slug: realSlug,
@@ -63,6 +70,7 @@ export function getProjectBySlug(slug: string, locale: string = 'en'): Project |
       allowDownloadDemo: meta.allowDownloadDemo,
       allowRequestProject: meta.allowRequestProject,
       previewImage: meta.previewImage,
+      content,
     };
   } catch (error) {
     console.error('Error parsing project meta:', error);
