@@ -30,15 +30,15 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-muted-foreground">
           <div className="text-left">
             <p className="font-medium mb-1">{t('contentLicenseTitle')}</p>
-            <p>
-              {t('contentLicenseText')} 
+            <p className="leading-normal">
+              {t('contentLicenseText')}
               <Link 
                 href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" 
                 target="_blank"
-                className="inline-flex items-center gap-1 mx-1 hover:text-foreground transition-colors"
+                className="inline items-center gap-1 mx-1 hover:text-foreground transition-colors align-middle"
               >
-                <CreativeCommons className="w-4 h-4" />
-                {t('contentLicenseLinkText')}
+                <CreativeCommons className="w-3.5 h-3.5 inline align-middle mr-0.5" />
+                <span className="inline align-middle">{t('contentLicenseLinkText')}</span>
               </Link>
               {t('contentLicenseTextEnd')}
             </p>
