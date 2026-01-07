@@ -1,0 +1,13 @@
+{
+  "title": {
+    "en": "New Test Blog Post",
+    "zh": "新测试博客文章"
+  },
+  "description": {
+    "en": "This is a new test blog post for the automated parser.",
+    "zh": "这是一篇新的用于测试自动解析器的博客文章。"
+  },
+  "date": "2026-01-07",
+  "tags": ["new", "test", "automation", "blog"],
+  "coverImage": ""
+}
