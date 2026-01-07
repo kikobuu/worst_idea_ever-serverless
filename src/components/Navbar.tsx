@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { Search, Globe, Sun, Moon, Mail, Menu, Box, Monitor, Info, Home } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTranslations, useLocale } from "next-intl";
 import { Card } from "@/components/ui/card";
+import { SearchCommand } from "@/components/SearchCommand";
 
 const Navbar = () => {
   const { setTheme, theme } = useTheme();
@@ -18,6 +19,7 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const toggleLanguage = () => {
     const nextLocale = locale === 'en' ? 'zh' : 'en';
@@ -34,8 +36,21 @@ const Navbar = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <SearchCommand open={searchOpen} onOpenChange={setSearchOpen} />
       <div className="container flex h-16 items-center px-4">
         
         {/* Mobile Menu (Left) */}
@@ -159,14 +174,16 @@ const Navbar = () => {
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder={t('searchPlaceholder')}
-                  className="pl-8 w-[200px] lg:w-[300px] bg-muted/50"
+                  className="pl-8 w-[200px] lg:w-[300px] bg-muted/50 cursor-pointer"
+                  readOnly
+                  onClick={() => setSearchOpen(true)}
                 />
                 <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
                   <span className="text-xs">⌘</span>K
                 </kbd>
               </div>
               {/* Mobile Search Icon */}
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSearchOpen(true)}>
                 <Search className="h-4 w-4" />
                 <span className="sr-only">Search</span>
               </Button>

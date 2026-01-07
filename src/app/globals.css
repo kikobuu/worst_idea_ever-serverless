@@ -125,3 +125,187 @@
     @apply bg-background text-foreground;
   }
 }
+
+[data-cmdk-root] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background: var(--popover);
+  border-radius: var(--radius);
+  color: var(--popover-foreground);
+}
+
+[data-cmdk-input-wrapper] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding: 0 0.75rem;
+  height: 3rem;
+}
+
+[data-cmdk-input] {
+  flex: 1;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.875rem;
+}
+
+[data-cmdk-input]::placeholder {
+  color: var(--muted-foreground);
+}
+
+[data-cmdk-list] {
+  max-height: 18rem;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+[data-cmdk-group] {
+  overflow: hidden;
+}
+
+[data-cmdk-group-heading] {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+[data-cmdk-item] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: calc(var(--radius) - 4px);
+  cursor: pointer;
+  font-size: 0.875rem;
+  user-select: none;
+}
+
+[data-cmdk-item][data-selected="true"] {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+[data-cmdk-item][data-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+[data-cmdk-separator] {
+  height: 1px;
+  background-color: var(--border);
+  margin: 0.25rem 0;
+}
+
+[data-cmdk-empty] {
+  padding: 1.5rem 0.75rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+[data-slot="command"] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background: var(--popover);
+  border-radius: var(--radius);
+  color: var(--popover-foreground);
+}
+
+[data-slot="command-input-wrapper"] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding: 0 0.75rem;
+  height: 3rem;
+}
+
+[data-slot="command-input"] {
+  flex: 1;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.875rem;
+}
+
+[data-slot="command-input"]::placeholder {
+  color: var(--muted-foreground);
+}
+
+[data-slot="command-list"] {
+  max-height: 18rem;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+[data-slot="command-group"] {
+  overflow: hidden;
+}
+
+[data-slot="command-group-heading"] {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+[data-slot="command-item"] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: calc(var(--radius) - 4px);
+  cursor: pointer;
+  font-size: 0.875rem;
+  user-select: none;
+}
+
+[data-slot="command-item"][data-selected="true"] {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+[data-slot="command-item"][data-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+[data-slot="command-separator"] {
+  height: 1px;
+  background-color: var(--border);
+  margin: 0.25rem 0;
+}
+
+[data-slot="command-empty"] {
+  padding: 1.5rem 0.75rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+@keyframes cmdk-render-fix {
+  from {
+    opacity: 0.99;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+[data-slot="command"] {
+  animation: cmdk-render-fix 0.1s ease-out;
+}
+
+[data-slot="command-list"] {
+  contain: layout style;
+  will-change: scroll-position;
+}
