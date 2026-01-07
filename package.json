@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "node -r tsx src/scripts/start-dev.ts",
     "next:dev": "next dev",
-    "build": "node -r tsx src/scripts/parse-blogs.ts && next build",
+    "build": "node -r tsx src/scripts/parse-blogs.ts && node -r tsx src/scripts/parse-projects.ts && next build",
     "start": "next start",
     "lint": "eslint",
-    "parse-blogs": "node -r tsx src/scripts/parse-blogs.ts"
+    "parse-blogs": "node -r tsx src/scripts/parse-blogs.ts",
+    "parse-projects": "node -r tsx src/scripts/parse-projects.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

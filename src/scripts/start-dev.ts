@@ -3,18 +3,23 @@
 // 2. 启动文件监听
 // 3. 启动Next.js开发服务器
 
-import { processAllZipFiles, startFileWatcher } from '../lib/blog-parser';
+import { processAllZipFiles as processBlogZipFiles, startFileWatcher as startBlogFileWatcher } from '../lib/blog-parser';
+import { processAllZipFiles as processProjectZipFiles, startFileWatcher as startProjectFileWatcher } from '../lib/project-parser';
 import { spawn } from 'child_process';
 
 console.log('Starting development mode...');
 
-// 1. 先解析现有压缩包
 console.log('Parsing existing blog packages...');
-processAllZipFiles();
+processBlogZipFiles();
 
-// 2. 启动文件监听
 console.log('Starting file watcher for blog packages...');
-startFileWatcher();
+startBlogFileWatcher();
+
+console.log('Parsing existing project packages...');
+processProjectZipFiles();
+
+console.log('Starting file watcher for project packages...');
+startProjectFileWatcher();
 
 // 3. 启动Next.js开发服务器
 console.log('Starting Next.js development server...');

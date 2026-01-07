@@ -1,0 +1,18 @@
+{
+  "title": {
+    "en": "Sample Project",
+    "zh": "示例项目"
+  },
+  "type": "Game Development",
+  "description": {
+    "en": "This is a sample project demonstrating the project card functionality.",
+    "zh": "这是一个演示项目卡片功能的示例项目。"
+  },
+  "tags": ["Game", "Demo", "Sample"],
+  "demoLicense": "CC BY-NC-SA 4.0",
+  "projectLicense": "MIT",
+  "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "allowDownloadDemo": true,
+  "allowRequestProject": true,
+  "previewImage": "https://i.mij.rip/2026/01/08/e157aa9f116f16a9040e135c9f296845.png"
+}
