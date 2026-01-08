@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { getProjectBySlug } from "@/lib/project";
-import ProjectDetail from "./ProjectDetail";
+import { getProjectBySlug, getProjectContentDocs } from "@/lib/project";
+import ProjectDetailClient from "./ProjectDetailClient";
 
 export default async function ProjectPage({
   params
@@ -14,5 +14,7 @@ export default async function ProjectPage({
     notFound();
   }
 
-  return <ProjectDetail project={project} locale={locale} />;
+  const contentDocs = getProjectContentDocs(slug);
+
+  return <ProjectDetailClient project={project} locale={locale} contentDocs={contentDocs} />;
 }

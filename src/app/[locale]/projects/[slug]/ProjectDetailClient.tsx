@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent, UnderlinedTabsContent } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectItemDescription, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import ProjectFloatingMenu from "@/components/ProjectFloatingMenu";
 import ProjectMobileSheet from "@/components/ProjectMobileSheet";
 import ReactMarkdown from "react-markdown";
@@ -13,8 +14,10 @@ import rehypeSlug from "rehype-slug";
 import "highlight.js/styles/github-dark.css";
 import Mermaid from "@/components/Mermaid";
 import { isValidElement } from "react";
+import { ContentDoc } from "@/lib/project";
+import { useTranslations } from "next-intl";
 
-interface ProjectDetailProps {
+interface ProjectDetailClientProps {
   project: {
     slug: string;
     title: string;
@@ -28,16 +31,27 @@ interface ProjectDetailProps {
     allowRequestProject: boolean;
     previewImage?: string;
     content?: string;
+    contentDocs?: ContentDoc[];
   };
   locale: string;
+  contentDocs: ContentDoc[] | null;
 }
 
-export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
+export default function ProjectDetailClient({ project, locale, contentDocs }: ProjectDetailClientProps) {
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
-  const [activeContentTab, setActiveContentTab] = useState("toc");
+  const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
+  const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
+  const t = useTranslations('Project');
 
-  const headings = project.content?.match(/^#{2,3} .+/gm)?.map(heading => {
+  const projectWithDocs = { ...project, contentDocs: contentDocs ?? undefined };
+
+  const selectedDocData = projectWithDocs.contentDocs?.find(doc => doc.name === selectedDoc);
+  const selectedVersionData = selectedDocData?.versions.find(v => v.version === selectedVersion);
+  const selectedContent = selectedVersionData?.content ?? project.content;
+
+  const contentToParse = selectedContent;
+  const headings = contentToParse?.match(/^#{2,3} .+/gm)?.map(heading => {
     const level = heading.match(/^#+/)?.[0].length || 0;
     const text = heading.replace(/^#+ /, '').trim();
     const id = text
@@ -55,20 +69,20 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
           <div className="sticky top-24">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-4">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="content">Content</TabsTrigger>
+                <TabsTrigger value="overview">{t('overview')}</TabsTrigger>
+                <TabsTrigger value="content">{t('content')}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-4">
                 <div>
-                  <h4 className="font-bold mb-2 font-sans">Project Type</h4>
+                  <h4 className="font-bold mb-2 font-sans">{t('type')}</h4>
                   <p className="text-sm text-muted-foreground">{project.type}</p>
                 </div>
 
                 <Separator />
 
                 <div>
-                  <h4 className="font-bold mb-2 font-sans">Tags</h4>
+                  <h4 className="font-bold mb-2 font-sans">{t('tags')}</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => (
                       <span key={tag} className="bg-muted px-2 py-1 rounded text-sm">
@@ -81,13 +95,13 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
                 <Separator />
 
                 <div>
-                  <h4 className="font-bold mb-2 font-sans">Licenses</h4>
+                  <h4 className="font-bold mb-2 font-sans">{t('licenses')}</h4>
                   <div className="space-y-1 text-sm">
                     <p className="text-muted-foreground">
-                      Demo: {project.demoLicense}
+                      {t('demoLicense')}: {project.demoLicense}
                     </p>
                     <p className="text-muted-foreground">
-                      Project: {project.projectLicense}
+                      {t('projectLicense')}: {project.projectLicense}
                     </p>
                   </div>
                 </div>
@@ -96,14 +110,14 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
                   <>
                     <Separator />
                     <div>
-                      <h4 className="font-bold mb-2 font-sans">Video</h4>
+                      <h4 className="font-bold mb-2 font-sans">{t('video')}</h4>
                       <a
                         href={project.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-primary hover:underline"
                       >
-                        Watch Video
+                        {t('watchVideo')}
                       </a>
                     </div>
                   </>
@@ -112,51 +126,83 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
 
               <TabsContent value="content" className="space-y-4">
                 <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-muted-foreground">Content View</h4>
-                  <Select value={activeContentTab} onValueChange={setActiveContentTab}>
+                  <h4 className="text-sm font-medium text-muted-foreground">{t('selectDocument')}</h4>
+                  <Select value={selectedDoc || ""} onValueChange={(value) => {
+                    setSelectedDoc(value);
+                    const doc = projectWithDocs.contentDocs?.find(d => d.name === value);
+                    if (doc && doc.versions.length > 0) {
+                      setSelectedVersion(doc.versions[0].version);
+                    }
+                  }}>
                     <SelectTrigger className="w-full border border-border bg-background hover:bg-accent rounded-md shadow-sm transition-all duration-200 focus:border-primary focus:ring-1 focus:ring-primary">
                       <SelectValue 
-                        title={activeContentTab === "toc" ? "Contents" : "Analytics"} 
-                        description={activeContentTab === "toc" ? "View and navigate through the document structure" : "Track and analyze document engagement metrics"}
-                        placeholder="Select view" 
+                        title={selectedDocData?.meta.title || t('selectDocumentPlaceholder')}
+                        description={selectedDocData?.meta.description || t('chooseDocument')}
+                        placeholder={t('selectDocumentPlaceholder')}
                       />
                     </SelectTrigger>
                     <SelectContent className="bg-background border border-border rounded-md shadow-md">
-                      <SelectItem className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm" value="toc">
-                        <div className="font-medium">Contents</div>
-                        <SelectItemDescription>View and navigate through the document structure</SelectItemDescription>
-                      </SelectItem>
-                      <SelectItem className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm" value="analytics">
-                        <div className="font-medium">Analytics</div>
-                        <SelectItemDescription>Track and analyze document engagement metrics</SelectItemDescription>
-                      </SelectItem>
+                      {projectWithDocs.contentDocs?.map((doc) => (
+                        <SelectItem key={doc.name} value={doc.name} className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm">
+                          <div className="font-medium">{doc.meta.title}</div>
+                          <SelectItemDescription>{doc.meta.description}</SelectItemDescription>
+                        </SelectItem>
+                      )) || (
+                        <SelectItem value="" disabled>
+                          <div className="font-medium">{t('noDocuments')}</div>
+                          <SelectItemDescription>{t('noDocumentsDesc')}</SelectItemDescription>
+                        </SelectItem>
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
                 
-                {activeContentTab === "toc" && (
-                  <nav className="flex flex-col gap-2 font-sans">
-                    {headings.length === 0 && (
-                      <p className="text-sm text-muted-foreground">No headings</p>
-                    )}
-                    {headings.map((heading, index) => (
-                      <a
-                        key={index}
-                        href={`#${heading.id}`}
-                        className={`text-sm hover:text-primary transition-colors block py-1 border-l-2 border-transparent hover:border-primary pl-3 -ml-[2px] ${
-                          heading.level === 3
-                            ? 'ml-4 text-muted-foreground'
-                            : 'text-foreground'
-                        }`}
-                      >
-                        {heading.text}
-                      </a>
-                    ))}
-                  </nav>
+                {selectedDocData && selectedDocData.meta.hasMultipleVersions && (
+                  <div className="mt-4 space-y-2">
+                    <h4 className="text-sm font-medium text-muted-foreground">{t('selectVersion')}</h4>
+                    <Select value={selectedVersion || ""} onValueChange={setSelectedVersion}>
+                      <SelectTrigger className="w-full border border-border bg-background hover:bg-accent rounded-md shadow-sm transition-all duration-200 focus:border-primary focus:ring-1 focus:ring-primary">
+                        <SelectValue 
+                          title={`${t('version')} ${selectedVersion || t('selectVersionPlaceholder')}`}
+                          description={selectedVersion ? `${t('viewVersion')} ${selectedVersion}` : t('selectVersionPlaceholder')}
+                        />
+                      </SelectTrigger>
+                      <SelectContent className="bg-background border border-border rounded-md shadow-md">
+                        {selectedDocData.versions.map((version) => (
+                          <SelectItem key={version.version} value={version.version} className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm">
+                            <div className="font-medium">{t('version')} {version.version}</div>
+                            <SelectItemDescription>{selectedDocData.meta.versions[`VER ${version.version}`] || `${t('version')} ${version.version}`}</SelectItemDescription>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 )}
-                
-                {activeContentTab === "analytics" && (
-                  <p className="text-sm text-muted-foreground">Analytics data will be displayed here.</p>
+
+                {selectedDocData && selectedContent && (
+                  <div className="mt-4">
+                    <h5 className="text-sm font-medium mb-3">{t('documentStructure')}</h5>
+                    <ScrollArea className="h-[400px]">
+                      <nav className="flex flex-col gap-2 font-sans pr-4">
+                        {headings.length === 0 && (
+                          <p className="text-sm text-muted-foreground">{t('noHeadings')}</p>
+                        )}
+                        {headings.map((heading, index) => (
+                          <a
+                            key={index}
+                            href={`#${heading.id}`}
+                            className={`text-sm hover:text-primary transition-colors block py-1 border-l-2 border-transparent hover:border-primary pl-3 -ml-[2px] ${
+                              heading.level === 3
+                                ? 'ml-4 text-muted-foreground'
+                                : 'text-foreground'
+                            }`}
+                          >
+                            {heading.text}
+                          </a>
+                        ))}
+                      </nav>
+                    </ScrollArea>
+                  </div>
                 )}
               </TabsContent>
             </Tabs>
@@ -168,7 +214,7 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
             <h1 className="text-3xl md:text-4xl font-bold mb-4 font-sans">
               {project.title}
             </h1>
-            <div className="flex items-center text-muted-foreground gap-4 text-sm font-sans">
+            <div className="flex items-center text-muted-foreground gap-4 text-sm font-sans mb-4">
               <span>{project.type}</span>
               <div className="flex gap-2">
                 {project.tags.map(tag => (
@@ -178,9 +224,11 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
                 ))}
               </div>
             </div>
+            
+            {/* Version selector is now in sidebar */}
           </div>
 
-          {project.content && (
+          {selectedContent && (
             <article className="prose prose-slate dark:prose-invert max-w-none font-noto-sans">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
@@ -207,7 +255,7 @@ export default function ProjectDetail({ project, locale }: ProjectDetailProps) {
                   }
                 }}
               >
-                {project.content}
+                {selectedContent}
               </ReactMarkdown>
             </article>
           )}

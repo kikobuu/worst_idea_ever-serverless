@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import Image from "next/image";
-import { Search, Globe, Sun, Moon, Mail, Menu, Box, Monitor, Info, Home } from "lucide-react";
+import { Search, Globe, Sun, Moon, Mail, Menu, Box, Monitor, Info, Home, Languages } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -12,6 +12,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTranslations, useLocale } from "next-intl";
 import { Card } from "@/components/ui/card";
 import { SearchCommand } from "@/components/SearchCommand";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Navbar = () => {
   const { setTheme, theme } = useTheme();
@@ -22,9 +29,16 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const toggleLanguage = () => {
-    const nextLocale = locale === 'en' ? 'zh' : 'en';
-    router.replace(pathname, {locale: nextLocale});
+  const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'zh', name: '中文' },
+  { code: 'ko', name: '한국어' },
+  { code: 'ja', name: '日本語' },
+  { code: 'fr', name: 'Français' },
+  ];
+
+  const handleLanguageChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale });
     setOpen(false);
   };
 
@@ -104,13 +118,19 @@ const Navbar = () => {
                       {t('settings')}
                     </div>
                     <div className="grid grid-cols-2 gap-2">
-                      <Card 
-                        className="flex items-center justify-center gap-2 p-3 cursor-pointer hover:bg-accent transition-colors border-2 bg-card"
-                        onClick={toggleLanguage}
-                      >
-                        <Globe className="h-4 w-4" />
-                        <span className="text-sm font-medium">{locale === 'en' ? '中文' : 'English'}</span>
-                      </Card>
+                      <Select value={locale} onValueChange={handleLanguageChange}>
+                        <SelectTrigger className="flex items-center justify-center gap-2 p-3 cursor-pointer hover:bg-accent transition-colors border-2 bg-card [&_svg:last-child]:hidden">
+                          <Languages className="h-4 w-4" />
+                          <span className="text-sm font-medium">{languages.find(l => l.code === locale)?.name}</span>
+                        </SelectTrigger>
+                        <SelectContent className="bg-background border border-border rounded-md shadow-md">
+                          {languages.map((lang) => (
+                            <SelectItem key={lang.code} value={lang.code} className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm">
+                              <span className="font-medium">{lang.name}</span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <Card 
                         className="flex items-center justify-center gap-2 p-3 cursor-pointer hover:bg-accent transition-colors border-2 bg-card"
                         onClick={toggleTheme}
@@ -199,10 +219,18 @@ const Navbar = () => {
             </div>
           </div>
           
-          <Button variant="ghost" size="icon" className="h-9 w-9 flex-shrink-0" onClick={toggleLanguage}>
-            <Globe className="h-4 w-4" />
-            <span className="sr-only">Toggle language</span>
-          </Button>
+          <Select value={locale} onValueChange={handleLanguageChange}>
+            <SelectTrigger className="h-9 w-9 flex-shrink-0 border-0 bg-transparent hover:bg-accent [&_svg:last-child]:hidden">
+              <Languages className="h-4 w-4" />
+            </SelectTrigger>
+            <SelectContent className="bg-background border border-border rounded-md shadow-md min-w-[150px]">
+              {languages.map((lang) => (
+                <SelectItem key={lang.code} value={lang.code} className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm">
+                  <span className="font-medium">{lang.name}</span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
           <Button 
             variant="ghost" 

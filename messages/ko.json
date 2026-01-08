@@ -1,0 +1,60 @@
+{
+  "Navbar": {
+    "projects": "레벨 디자인",
+    "blogs": "블로그",
+    "about": "소개",
+    "searchPlaceholder": "검색",
+    "contact": "연락처",
+    "home": "홈",
+    "settings": "설정"
+  },
+  "Home": {
+    "projectsTitle": "레벨 디자인 프로젝트",
+    "blogsTitle": "개인 블로그",
+    "aboutTitle": "소개"
+  },
+  "Footer": {
+    "copyright": "모든 권리 보유.",
+    "copyrightPrefix": "©",
+    "copyrightName": "Yasushi Katsuyoshi",
+    "contentLicenseTitle": "콘텐츠 라이선스",
+    "contentLicenseText": "별도의 명시가 없는 한, 이 블로그의 원본 콘텐츠는",
+    "contentLicenseLinkText": "CC BY-NC-SA 4.0",
+    "contentLicenseTextEnd": "라이선스에 따라 라이선스됩니다.",
+    "contentLicenseReprint": "재게시 시 출처를 명시하고 원작자의 저작권 표시를 유지해야 합니다.",
+    "githubLabel": "GitHub에서 보기",
+    "siteLicense": "웹사이트 소스 코드는 GPL v3 하에 오픈 소스입니다"
+  },
+  "Blog": {
+    "title": "블로그",
+    "readMore": "더 읽기",
+    "tags": "태그",
+    "date": "날짜",
+    "noPosts": "게시물을 찾을 수 없습니다",
+    "tableOfContents": "목차",
+    "noHeadings": "제목 없음"
+  },
+  "Project": {
+    "title": "프로젝트",
+    "type": "유형",
+    "tags": "태그",
+    "licenses": "라이선스",
+    "demoLicense": "데모",
+    "projectLicense": "프로젝트",
+    "video": "비디오",
+    "watchVideo": "비디오 보기",
+    "overview": "개요",
+    "content": "콘텐츠",
+    "selectDocument": "문서 선택",
+    "selectDocumentPlaceholder": "문서를 선택하세요",
+    "chooseDocument": "보려는 문서를 선택하세요",
+    "noDocuments": "사용 가능한 문서 없음",
+    "noDocumentsDesc": "이 프로젝트에 대한 문서를 찾을 수 없습니다",
+    "selectVersion": "버전 선택",
+    "selectVersionPlaceholder": "버전을 선택하세요",
+    "viewVersion": "문서 버전 보기",
+    "documentStructure": "문서 구조",
+    "noHeadings": "제목 없음",
+    "version": "버전"
+  }
+}

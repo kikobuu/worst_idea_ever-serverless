@@ -23,6 +23,38 @@
     "contentLicenseTextEnd": "协议进行授权。",
     "contentLicenseReprint": "转载时请注明出处并保留原作者署名。",
     "githubLabel": "在 GitHub 上查看",
-    "siteLicense": "网站源码采用 GPL v3 协议开源"
+    "siteLicense": "网站源码采用 GPL v3 协议"
+  },
+  "Blog": {
+    "title": "博客",
+    "readMore": "阅读更多",
+    "tags": "标签",
+    "date": "日期",
+    "noPosts": "未找到文章",
+    "tableOfContents": "目录",
+    "noHeadings": "无标题"
+  },
+  "Project": {
+    "title": "项目",
+    "type": "类型",
+    "tags": "标签",
+    "licenses": "许可证",
+    "demoLicense": "演示",
+    "projectLicense": "项目",
+    "video": "视频",
+    "watchVideo": "观看视频",
+    "overview": "概览",
+    "content": "内容",
+    "selectDocument": "选择文档",
+    "selectDocumentPlaceholder": "选择一个文档",
+    "chooseDocument": "选择要查看的文档",
+    "noDocuments": "无可用文档",
+    "noDocumentsDesc": "未找到该项目的文档",
+    "selectVersion": "选择版本",
+    "selectVersionPlaceholder": "选择一个版本",
+    "viewVersion": "查看文档版本",
+    "documentStructure": "文档结构",
+    "noHeadings": "无标题",
+    "version": "版本"
   }
 }

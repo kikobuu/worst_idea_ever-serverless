@@ -1,0 +1,60 @@
+{
+  "Navbar": {
+    "projects": "レベルデザイン",
+    "blogs": "ブログ",
+    "about": "について",
+    "searchPlaceholder": "検索",
+    "contact": "連絡先",
+    "home": "ホーム",
+    "settings": "設定"
+  },
+  "Home": {
+    "projectsTitle": "レベルデザインプロジェクト",
+    "blogsTitle": "個人ブログ",
+    "aboutTitle": "について"
+  },
+  "Footer": {
+    "copyright": "全著作権所有。",
+    "copyrightPrefix": "©",
+    "copyrightName": "Yasushi Katsuyoshi",
+    "contentLicenseTitle": "コンテンツライセンス",
+    "contentLicenseText": "特記のない限り、このブログのオリジナルコンテンツは",
+    "contentLicenseLinkText": "CC BY-NC-SA 4.0",
+    "contentLicenseTextEnd": "ライセンスの下で提供されています。",
+    "contentLicenseReprint": "転載する際は出典を明記し、原作者の帰属を保持してください。",
+    "githubLabel": "GitHubで見る",
+    "siteLicense": "ウェブサイトのソースコードはGPL v3の下でオープンソースです"
+  },
+  "Blog": {
+    "title": "ブログ",
+    "readMore": "続きを読む",
+    "tags": "タグ",
+    "date": "日付",
+    "noPosts": "投稿が見つかりません",
+    "tableOfContents": "目次",
+    "noHeadings": "見出しがありません"
+  },
+  "Project": {
+    "title": "プロジェクト",
+    "type": "タイプ",
+    "tags": "タグ",
+    "licenses": "ライセンス",
+    "demoLicense": "デモ",
+    "projectLicense": "プロジェクト",
+    "video": "ビデオ",
+    "watchVideo": "ビデオを見る",
+    "overview": "概要",
+    "content": "コンテンツ",
+    "selectDocument": "ドキュメントを選択",
+    "selectDocumentPlaceholder": "ドキュメントを選択",
+    "chooseDocument": "表示するドキュメントを選択",
+    "noDocuments": "利用可能なドキュメントがありません",
+    "noDocumentsDesc": "このプロジェクトのドキュメントが見つかりません",
+    "selectVersion": "バージョンを選択",
+    "selectVersionPlaceholder": "バージョンを選択",
+    "viewVersion": "ドキュメントバージョンを表示",
+    "documentStructure": "ドキュメント構造",
+    "noHeadings": "見出しがありません",
+    "version": "バージョン"
+  }
+}

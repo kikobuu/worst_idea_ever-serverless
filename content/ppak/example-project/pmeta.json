@@ -1,0 +1,18 @@
+{
+  "title": {
+    "en": "Example Game Project",
+    "zh": "示例游戏项目"
+  },
+  "type": "Game Development",
+  "description": {
+    "en": "An example project demonstrating new document parsing system with multiple versions.",
+    "zh": "一个演示新文档解析系统的示例项目，包含多个版本。"
+  },
+  "tags": ["Game", "Demo", "Example"],
+  "demoLicense": "CC BY-NC-SA 4.0",
+  "projectLicense": "MIT",
+  "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "allowDownloadDemo": true,
+  "allowRequestProject": true,
+  "previewImage": "https://i.mij.rip/2026/01/08/e157aa9f116f16a9040e135c9f296845.png"
+}

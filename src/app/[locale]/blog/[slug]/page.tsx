@@ -8,6 +8,7 @@ import "highlight.js/styles/github-dark.css";
 import { Separator } from "@/components/ui/separator";
 import Mermaid from "@/components/Mermaid";
 import { isValidElement } from "react";
+import { getTranslations } from "next-intl/server";
 
 export default async function BlogPost({
   params
@@ -20,6 +21,8 @@ export default async function BlogPost({
   if (!post) {
     notFound();
   }
+
+  const t = await getTranslations('Blog');
 
   // Simple extraction for TOC (H2 and H3)
   // Note: This simple ID generation might not perfectly match rehype-slug for complex characters
@@ -79,10 +82,10 @@ export default async function BlogPost({
         {/* Sidebar TOC */}
         <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-24">
-                <h4 className="font-bold mb-4 font-sans">Table of Contents</h4>
+                <h4 className="font-bold mb-4 font-sans">{t('tableOfContents')}</h4>
                 <Separator className="mb-4" />
                 <nav className="flex flex-col gap-2 font-sans">
-                    {headings.length === 0 && <p className="text-sm text-muted-foreground">No headings</p>}
+                    {headings.length === 0 && <p className="text-sm text-muted-foreground">{t('noHeadings')}</p>}
                     {headings.map((heading, index) => (
                         <a 
                             key={index} 

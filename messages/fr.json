@@ -1,0 +1,60 @@
+{
+  "Navbar": {
+    "projects": "Conception de niveaux",
+    "blogs": "Blogs",
+    "about": "À propos",
+    "searchPlaceholder": "Rechercher",
+    "contact": "Contact",
+    "home": "Accueil",
+    "settings": "Paramètres"
+  },
+  "Home": {
+    "projectsTitle": "Projets de conception de niveaux",
+    "blogsTitle": "Blogs personnels",
+    "aboutTitle": "À propos"
+  },
+  "Footer": {
+    "copyright": "Tous droits réservés.",
+    "copyrightPrefix": "©",
+    "copyrightName": "Yasushi Katsuyoshi",
+    "contentLicenseTitle": "Licence du contenu",
+    "contentLicenseText": "Sauf indication contraire, le contenu original de ce blog est sous licence",
+    "contentLicenseLinkText": "CC BY-NC-SA 4.0",
+    "contentLicenseTextEnd": "licence.",
+    "contentLicenseReprint": "Les réimpressions doivent indiquer la source et conserver l'attribution de l'auteur original.",
+    "githubLabel": "Voir sur GitHub",
+    "siteLicense": "Le code source du site Web est open source sous GPL v3"
+  },
+  "Blog": {
+    "title": "Blogs",
+    "readMore": "Lire la suite",
+    "tags": "Étiquettes",
+    "date": "Date",
+    "noPosts": "Aucun article trouvé",
+    "tableOfContents": "Table des matières",
+    "noHeadings": "Aucun titre"
+  },
+  "Project": {
+    "title": "Projets",
+    "type": "Type",
+    "tags": "Étiquettes",
+    "licenses": "Licences",
+    "demoLicense": "Démo",
+    "projectLicense": "Projet",
+    "video": "Vidéo",
+    "watchVideo": "Regarder la vidéo",
+    "overview": "Aperçu",
+    "content": "Contenu",
+    "selectDocument": "Sélectionner un document",
+    "selectDocumentPlaceholder": "Sélectionner un document",
+    "chooseDocument": "Choisir un document à afficher",
+    "noDocuments": "Aucun document disponible",
+    "noDocumentsDesc": "Aucun document trouvé pour ce projet",
+    "selectVersion": "Sélectionner une version",
+    "selectVersionPlaceholder": "Sélectionner une version",
+    "viewVersion": "Afficher la version du document",
+    "documentStructure": "Structure du document",
+    "noHeadings": "Aucun titre",
+    "version": "Version"
+  }
+}

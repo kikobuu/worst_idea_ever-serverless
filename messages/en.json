@@ -3,7 +3,7 @@
     "projects": "LD Projects",
     "blogs": "Blogs",
     "about": "About",
-    "searchPlaceholder": "Search documentation",
+    "searchPlaceholder": "Search",
     "contact": "Contact me",
     "home": "Home",
     "settings": "Settings"
@@ -23,6 +23,38 @@
     "contentLicenseTextEnd": "protocol.",
     "contentLicenseReprint": "Reprints must attribute the source and retain original author attribution.",
     "githubLabel": "View on GitHub",
-    "siteLicense": "Website source code is open source under GPL v3"
+    "siteLicense": "Website is open source under GPL v3"
+  },
+  "Blog": {
+    "title": "Blogs",
+    "readMore": "Read More",
+    "tags": "Tags",
+    "date": "Date",
+    "noPosts": "No posts found",
+    "tableOfContents": "Table of Contents",
+    "noHeadings": "No headings"
+  },
+  "Project": {
+    "title": "Projects",
+    "type": "Type",
+    "tags": "Tags",
+    "licenses": "Licenses",
+    "demoLicense": "Demo",
+    "projectLicense": "Project",
+    "video": "Video",
+    "watchVideo": "Watch Video",
+    "overview": "Overview",
+    "content": "Content",
+    "selectDocument": "Select Document",
+    "selectDocumentPlaceholder": "Select a document",
+    "chooseDocument": "Choose a document to view",
+    "noDocuments": "No documents available",
+    "noDocumentsDesc": "No documents found for this project",
+    "selectVersion": "Select Version",
+    "selectVersionPlaceholder": "Select a version",
+    "viewVersion": "View document version",
+    "documentStructure": "Document Structure",
+    "noHeadings": "No headings",
+    "version": "Version"
   }
 }

@@ -21,20 +21,17 @@ processProjectZipFiles();
 console.log('Starting file watcher for project packages...');
 startProjectFileWatcher();
 
-// 3. 启动Next.js开发服务器
 console.log('Starting Next.js development server...');
 const nextDev = spawn('npm', ['run', 'next:dev'], {
   stdio: 'inherit',
   shell: true
 });
 
-// 处理Next.js服务器退出
 nextDev.on('exit', (code) => {
   console.log(`Next.js development server exited with code ${code}`);
   process.exit(code);
 });
 
-// 处理SIGINT信号（Ctrl+C）
 process.on('SIGINT', () => {
   console.log('Received SIGINT, shutting down...');
   nextDev.kill('SIGINT');

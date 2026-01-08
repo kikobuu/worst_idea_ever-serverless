@@ -45,6 +45,7 @@ const Footer = () => {
             <p>{t('contentLicenseReprint')}</p>
           </div>
           <div className="text-left md:text-right">
+            <p className="mb-1">{t('siteLicense')}</p>
             <Link 
               href="https://github.com/kikobuu/worst_idea_ever-serverless.git" 
               target="_blank"
@@ -53,7 +54,6 @@ const Footer = () => {
               <Github className="w-4 h-4" />
               <span>{t('githubLabel')}</span>
             </Link>
-            <p className="mt-1">{t('siteLicense')}</p>
           </div>
         </div>
       </div>

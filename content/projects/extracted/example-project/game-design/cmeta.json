@@ -1,0 +1,10 @@
+{
+  "title": "Game Design Document",
+  "description": "Comprehensive game design documentation covering core mechanics and systems",
+  "hasMultipleVersions": true,
+  "versions": {
+    "VER 1.0": "/game-design_v1.0.md",
+    "VER 1.5": "/game-design_v1.5.md",
+    "VER 2.0": "/game-design_v2.0.md"
+  }
+}

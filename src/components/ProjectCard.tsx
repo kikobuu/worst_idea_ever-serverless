@@ -90,9 +90,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
         
         <div className="flex gap-2 w-full">
-          <Button variant="default" size="sm" className="flex-1">
-            <ExternalLink className="h-4 w-4 mr-1" />
-            View Details
+          <Button variant="default" size="sm" className="flex-1" asChild>
+            <a href={`/projects/${project.slug}`}>
+              <ExternalLink className="h-4 w-4 mr-1" />
+              View Details
+            </a>
           </Button>
           
           {project.allowRequestProject ? (
