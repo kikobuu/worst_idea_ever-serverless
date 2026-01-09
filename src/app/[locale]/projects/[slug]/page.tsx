@@ -14,7 +14,7 @@ export default async function ProjectPage({
     notFound();
   }
 
-  const contentDocs = getProjectContentDocs(slug);
+  const contentDocs = getProjectContentDocs(slug, locale);
 
   return <ProjectDetailClient project={project} locale={locale} contentDocs={contentDocs} />;
 }

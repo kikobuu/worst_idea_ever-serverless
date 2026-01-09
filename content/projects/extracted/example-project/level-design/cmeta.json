@@ -1,8 +1,16 @@
 {
-  "title": "Level Design Guide",
-  "description": "Standard measurement data and guidelines for level design",
+  "title": {
+    "en": "Level Design Guide",
+    "zh": "关卡设计指南"
+  },
+  "description": {
+    "en": "Standard measurement data and guidelines for level design",
+    "zh": "关卡设计的标准测量数据和指南"
+  },
   "hasMultipleVersions": false,
   "versions": {
-    "VER 1.0": "/level-design_v1.0.md"
-  }
+    "VER 1.0": "/v1.0"
+  },
+  "contentType": "category",
+  "supportedLocales": ["en", "zh"]
 }

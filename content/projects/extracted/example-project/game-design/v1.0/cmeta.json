@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en": "Game Design Document v1.0",
+    "zh": "游戏设计文档 v1.0"
+  },
+  "description": {
+    "en": "Initial version of the game design document covering core mechanics.",
+    "zh": "游戏设计文档的初始版本，包含核心机制。"
+  },
+  "contentType": "markdown",
+  "version": "1.0",
+  "assets": [],
+  "supportedLocales": ["en"]
+}

@@ -39,12 +39,20 @@ interface ProjectDetailClientProps {
 
 export default function ProjectDetailClient({ project, locale, contentDocs }: ProjectDetailClientProps) {
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("overview");
-  const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
-  const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
   const t = useTranslations('Project');
-
-  const projectWithDocs = { ...project, contentDocs: contentDocs ?? undefined };
+  
+  // Sort content docs by name for consistency
+  const sortedContentDocs = contentDocs?.sort((a, b) => a.name.localeCompare(b.name));
+  
+  const projectWithDocs = { ...project, contentDocs: sortedContentDocs ?? undefined };
+  
+  // Find first document if available
+  const firstDoc = projectWithDocs.contentDocs?.[0];
+  const firstVersion = firstDoc?.versions?.[0]?.version;
+  
+  const [activeTab, setActiveTab] = useState("overview");
+  const [selectedDoc, setSelectedDoc] = useState<string | null>(firstDoc?.name || null);
+  const [selectedVersion, setSelectedVersion] = useState<string | null>(firstVersion || null);
 
   const selectedDocData = projectWithDocs.contentDocs?.find(doc => doc.name === selectedDoc);
   const selectedVersionData = selectedDocData?.versions.find(v => v.version === selectedVersion);
@@ -136,16 +144,16 @@ export default function ProjectDetailClient({ project, locale, contentDocs }: Pr
                   }}>
                     <SelectTrigger className="w-full border border-border bg-background hover:bg-accent rounded-md shadow-sm transition-all duration-200 focus:border-primary focus:ring-1 focus:ring-primary">
                       <SelectValue 
-                        title={selectedDocData?.meta.title || t('selectDocumentPlaceholder')}
-                        description={selectedDocData?.meta.description || t('chooseDocument')}
+                        title={selectedDocData?.meta.title?.[locale] || selectedDocData?.meta.title?.['en'] || t('selectDocumentPlaceholder')}
+                        description={selectedDocData?.meta.description?.[locale] || selectedDocData?.meta.description?.['en'] || t('chooseDocument')}
                         placeholder={t('selectDocumentPlaceholder')}
                       />
                     </SelectTrigger>
                     <SelectContent className="bg-background border border-border rounded-md shadow-md">
                       {projectWithDocs.contentDocs?.map((doc) => (
                         <SelectItem key={doc.name} value={doc.name} className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm">
-                          <div className="font-medium">{doc.meta.title}</div>
-                          <SelectItemDescription>{doc.meta.description}</SelectItemDescription>
+                          <div className="font-medium">{doc.meta.title?.[locale] || doc.meta.title?.['en']}</div>
+                          <SelectItemDescription>{doc.meta.description?.[locale] || doc.meta.description?.['en']}</SelectItemDescription>
                         </SelectItem>
                       )) || (
                         <SelectItem value="" disabled>
@@ -171,8 +179,8 @@ export default function ProjectDetailClient({ project, locale, contentDocs }: Pr
                         {selectedDocData.versions.map((version) => (
                           <SelectItem key={version.version} value={version.version} className="hover:bg-accent hover:text-accent-foreground transition-colors duration-150 rounded-sm">
                             <div className="font-medium">{t('version')} {version.version}</div>
-                            <SelectItemDescription>{selectedDocData.meta.versions[`VER ${version.version}`] || `${t('version')} ${version.version}`}</SelectItemDescription>
-                          </SelectItem>
+                            <SelectItemDescription>{version.date ? new Date(version.date).toLocaleDateString() : t('noDateInfo')}</SelectItemDescription>
+                        </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>

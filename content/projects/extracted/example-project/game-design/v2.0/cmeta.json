@@ -1,0 +1,14 @@
+{
+  "title": {
+    "en": "Game Design Document v2.0",
+    "zh": "游戏设计文档 v2.0"
+  },
+  "description": {
+    "en": "Final version of the game design document with complete systems.",
+    "zh": "完整的游戏设计文档最终版本，包含所有系统。"
+  },
+  "contentType": "markdown",
+  "version": "2.0",
+  "assets": [],
+  "supportedLocales": ["en"]
+}
