@@ -126,7 +126,7 @@ export function getProjectContentDocs(slug: string, locale: string = 'en'): Cont
           const meta = JSON.parse(fs.readFileSync(cmetaPath, 'utf8')) as ContentMeta;
           const files = fs.readdirSync(itemPath);
           
-          const versions: { version: string; filePath: string; content: string }[] = [];
+          const versions: { version: string; filePath: string; content: string; date: string }[] = [];
           
           // Check for version subdirectories (new structure)
           const versionDirs = files.filter(file => {
