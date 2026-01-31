@@ -1,16 +1,22 @@
 {
   "title": {
     "en": "One Pager",
-    "zh": "项目概览"
+    "zh": "项目概览",
+    "ja": "ワンページ",
+    "ko": "원 페이저",
+    "fr": "Un Pager"
   },
   "description": {
     "en": "One Pager document for FOCAL project",
-    "zh": "FOCAL 项目的概览文档"
+    "zh": "FOCAL 项目的概览文档",
+    "ja": "FOCAL プロジェクトのワンページ文書",
+    "ko": "FOCAL 프로젝트의 원 페이저 문서",
+    "fr": "Document Un Pager pour le projet FOCAL"
   },
   "hasMultipleVersions": false,
   "versions": {
     "VER 1.0": "/v1.0"
   },
   "contentType": "category",
-  "supportedLocales": ["zh"]
+  "supportedLocales": ["zh", "en", "ja", "ko", "fr"]
 }
