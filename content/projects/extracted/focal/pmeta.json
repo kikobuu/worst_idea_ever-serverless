@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "FOCAL Project",
+    "zh": "FOCAL 项目"
+  },
+  "type": "Game Development",
+  "description": {
+    "en": "A high-mobility vertical combat space design based on three-faction据点牵制 system.",
+    "zh": "基于三方阵营据点牵制的高机动性垂直立体战斗空间设计。"
+  },
+  "tags": ["Game", "FPS", "FOCAL"],
+  "demoLicense": "CC BY-NC-SA 4.0",
+  "projectLicense": "MIT",
+  "allowDownloadDemo": true,
+  "allowRequestProject": true,
+  "previewImage": "assets/FOCAL-20260130011805-yd2iysa.jpg"
+}

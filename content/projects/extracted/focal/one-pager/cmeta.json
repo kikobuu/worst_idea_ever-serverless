@@ -1,0 +1,16 @@
+{
+  "title": {
+    "en": "One Pager",
+    "zh": "项目概览"
+  },
+  "description": {
+    "en": "One Pager document for FOCAL project",
+    "zh": "FOCAL 项目的概览文档"
+  },
+  "hasMultipleVersions": false,
+  "versions": {
+    "VER 1.0": "/v1.0"
+  },
+  "contentType": "category",
+  "supportedLocales": ["zh"]
+}
