@@ -29,7 +29,7 @@
 
 ##### Overall Layout and Legend Description:
 
-![FOCAL](assets/FOCAL-20260130011805-yd2iysa.jpg)
+![FOCAL](https://image.baidu.com/search/down?url=https://tvax3.sinaimg.cn/large/005ZMomSgy1i9ufgjfvkvj30zk0k0wok.jpg)
 
 ```mermaid
 graph LR
